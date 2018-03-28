@@ -8,10 +8,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/meircif/language-lumi.git"
+    "url": "https://github.com/meircif/atom-language-lumi.git"
   },
   "bugs": {
-    "url": "https://github.com/meircif/language-lumi/issues"
+    "url": "https://github.com/meircif/atom-language-lumi/issues"
   },
   "license": "MIT"
 }
