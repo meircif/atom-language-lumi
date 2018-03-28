@@ -1,6 +1,6 @@
 {
   "name": "language-lumi",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Lumi language support in Atom",
   "engines": {
     "atom": "*"
@@ -15,4 +15,3 @@
   },
   "license": "MIT"
 }
-
