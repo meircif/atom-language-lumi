@@ -83,11 +83,18 @@
     'captures': '1': 'name': 'keyword.other.lumi'
   },
   {
-    'match': '^ +(new|return|raise|assert|assert-error|try|catch)\\s'
+    'match': '^ *(for) (.+) (in) '
+    'captures':
+      '1': 'name': 'keyword.control.lumi'
+      '2': 'patterns': [{'include': '$self'}]
+      '3': 'name': 'keyword.control.lumi'
+  },
+  {
+    'match': '^ *(new|return|raise|assert|assert-error|try|catch)\\s'
     'captures': '1': 'name': 'keyword.other.lumi'
   },
   {
-    'match': '^ +(if|else|else-if|do|while|break|continue|for|in|switch|case|default|fallthrough)\\s'
+    'match': '^ *(if|else|else-if|do|while|break|continue|switch|case|default|fallthrough)\\s'
     'captures': '1': 'name': 'keyword.control.lumi'
   },
   {
@@ -99,13 +106,13 @@
     'captures': '1': 'name': 'storage.modifier.lumi'
   },
   {
-    'match': '\\b([a-z][a-z-]+)(\\()'
+    'match': '\\b([a-z][a-z0-9-]*)(\\()'
     'captures':
       '1': 'name': 'entity.name.function.lumi'
       '2': 'name': 'keyword.operator.lumi'
   },
   {
-    'match': '\\b(self|base)([. \n])'
+    'match': '\\b(self|base|sys)([. \n])'
     'captures':
       '1': 'name': 'variable.language.lumi'
       '2': 'name': 'keyword.operator.lumi'
@@ -115,11 +122,11 @@
     'name': 'constant.language.lumi'
   },
   {
-    'match': '\\b([A-Z][a-z][a-zA-Z0-9]+)\\b'
+    'match': '\\b([A-Z][a-z][a-zA-Z0-9]*)\\b'
     'name': 'entity.name.type.lumi'
   },
   {
-    'match': '\\b([A-Z][A-Z0-9\\-]+)\\b'
+    'match': '\\b([A-Z][A-Z0-9\\-]*)\\b'
     'name': 'constant.other.lumi'
   },
   {
@@ -127,7 +134,7 @@
     'name': 'keyword.operator.lumi'
   },
   {
-    'match': '\\b([a-z](?:[a-z0-9-]+)?)\\b'
+    'match': '\\b([a-z][a-z0-9-]*)\\b'
     'name': 'variable.parameter.lumi'
   },
   {

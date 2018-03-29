@@ -1,0 +1,6 @@
+'.source.lumi':
+  'editor':
+    'commentStart': '; '
+    'tabLength' : 2
+    'showIndentGuide': true
+    'nonWordCharacters': '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?_'
