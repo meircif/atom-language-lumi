@@ -112,7 +112,7 @@
       '2': 'name': 'keyword.operator.lumi'
   },
   {
-    'match': '\\b(self|base|sys)([. \n])'
+    'match': '\\b(self|base|sys)([. ?\n])'
     'captures':
       '1': 'name': 'variable.language.lumi'
       '2': 'name': 'keyword.operator.lumi'
