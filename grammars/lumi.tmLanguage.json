@@ -152,9 +152,9 @@
     "support": {
       "match": "^(support) (.+) (in) ",
       "captures": {
-        "1": { "name": "keyword.control.lumi" },
+        "1": { "name": "keyword.other.lumi" },
         "2": { "patterns": [{ "include": "$self" }] },
-        "3": { "name": "keyword.control.lumi" }
+        "3": { "name": "keyword.other.lumi" }
       }
     },
     "function": {
