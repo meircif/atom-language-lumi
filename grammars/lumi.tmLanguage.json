@@ -1,0 +1,245 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "source.lumi",
+  "name": "Lumi",
+  "fileTypes": ["lm"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#literals" },
+    { "include": "#structures" },
+    { "include": "#keywords" },
+    { "include": "#names" },
+    { "include": "#token-debug" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "include": "#documentation" },
+        { "include": "#comment-block" },
+        { "include": "#comment-line" }
+      ]
+    },
+    "literals": {
+      "patterns": [
+        { "include": "#string" },
+        { "include": "#character" },
+        { "include": "#buffer" },
+        { "include": "#number" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "structures": {
+      "patterns": [
+        { "include": "#module" },
+        { "include": "#for" },
+        { "include": "#support" },
+        { "include": "#function" }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        { "include": "#global-keyword" },
+        { "include": "#scope-keyword" },
+        { "include": "#block-keyword" },
+        { "include": "#control-keyword" },
+        { "include": "#binary-operator" },
+        { "include": "#unary-operator" },
+        { "include": "#access" }
+      ]
+    },
+    "names": {
+      "patterns": [
+        { "include": "#builtin-constant" },
+        { "include": "#builtin-variable" },
+        { "include": "#function-name" },
+        { "include": "#type-name" },
+        { "include": "#constant-name" },
+        { "include": "#variable-name" }
+      ]
+    },
+    "token-debug": {
+      "match": "^<(.+)>$",
+      "name": "$1.lumi"
+    },
+    "documentation": {
+      "begin": "~~~",
+      "end": "~~~",
+      "name": "comment.block.documentation.lumi"
+    },
+    "comment-block": {
+      "begin": "\\[;",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.comment.begin.lumi" }
+      },
+      "end": ";]",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.comment.end.lumi" }
+      },
+      "name": "comment.block.lumi"
+    },
+    "comment-line": {
+      "match": "; .*$",
+      "name": "comment.line.lumi"
+    },
+    "string": {
+      "begin": "\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.lumi" }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.lumi" }
+      },
+      "name": "string.quoted.double.lumi",
+      "patterns": [
+        {
+          "match": "\\\\.|\\\\\\n",
+          "name": "constant.character.escape.lumi"
+        }
+      ]
+    },
+    "character": {
+      "begin": "'",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.constant.character.begin.lumi" }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.constant.character.end.lumi" }
+      },
+      "name": "constant.character.lumi",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.lumi"
+        }
+      ]
+    },
+    "buffer": {
+      "begin": "`",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.lumi"  }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.lumi" }
+      },
+      "name": "string.quoted.single.lumi"
+    },
+    "number": {
+      "match": "-?(?:0x[0-9a-fA-F]+|0b[0-1]+|[0-9]+)",
+      "name": "constant.numeric.lumi"
+    },
+    "punctuation": {
+      "match": "[(),{}\\[\\]:.?!]|->",
+      "name": "keyword.operator.lumi"
+    },
+    "module": {
+      "match": "^(module) ([a-z][a-z0-9-]+)$",
+      "captures": {
+        "1": { "name": "keyword.other.lumi" },
+        "2": { "name": "entity.name.section.lumi" }
+      }
+    },
+    "for": {
+      "match": "^ +(for) (.+) (in) ",
+      "captures": {
+        "1": { "name": "keyword.control.lumi" },
+        "2": { "patterns": [ { "include": "$self" }] },
+        "3": { "name": "keyword.control.lumi" }
+      }
+    },
+    "support": {
+      "match": "^(support) (.+) (in) ",
+      "captures": {
+        "1": { "name": "keyword.control.lumi" },
+        "2": { "patterns": [{ "include": "$self" }] },
+        "3": { "name": "keyword.control.lumi" }
+      }
+    },
+    "function": {
+      "match": "^ *(func)(?: (inst|dynamic|static))?(?: ([a-z\\-]+)(\\??))?\\s",
+      "captures": {
+        "1": { "name": "keyword.other.lumi" },
+        "2": { "name": "keyword.other.lumi"  },
+        "3": { "name": "storage.modifier.lumi" },
+        "4": { "name": "keyword.operator.lumi"  }
+      }
+    },
+    "global-keyword": {
+      "match": "^(const|struct|class|dynamic|main|enum|native(?: include| var| const| func| type| struct| code)|test|mock|alias)\\s",
+      "captures": {
+        "1": { "name": "keyword.other.lumi" }
+      }
+    },
+    "scope-keyword": {
+      "match": "^ *(var|owner|user|strong|weak|s-var|shared|new) ((?:[a-z]+\\.)?[A-Z][a-z][a-zA-Z0-9]*\\??(?:{.*})?) ([a-z][a-z0-9-]*)([!(\\n])",
+      "captures": {
+        "1": { "name": "keyword.other.lumi"  },
+        "2": { "patterns": [{ "include": "$self" }] },
+        "3": { "name": "variable.parameter.lumi" },
+        "4": { "name": "keyword.operator.lumi" }
+      }
+    },
+    "block-keyword": {
+      "match": "^ +(new|return|raise!?|assert!?|assert-error!?|try|catch|native)\\s",
+      "captures": {
+        "1": { "name": "keyword.other.lumi" }
+      }
+    },
+    "control-keyword": {
+      "match": "^ +(block|if|else|else-if|if-ok|if-error|else-if-ok|else-if-error|loop!?|loop-infinite|repeat|while|break|continue|switch|case|default|fallthrough)\\s",
+      "captures": {
+        "1": { "name": "keyword.control.lumi" }
+      }
+    },
+    "binary-operator": {
+      "match": " (\\+|-|\\*|div|mod|bor|band|xor|shr|shl|=|<>|>|<|>=|<=|is|is-not|not|or|and|:=|\\+=|-=|\\*=|:=:|(?:wraparound|clamp)[+\\-*]=?)[ \\n]",
+      "captures": {
+        "1": { "name": "keyword.operator.lumi" }
+      }
+    },
+    "unary-operator": {
+      "match": "(-|bnot|not|wraparound)[ \\n]",
+      "captures": {
+        "1": { "name": "keyword.operator.lumi" }
+      }
+    },
+    "access": {
+      "match": "\\b(var|copy|owner|user|reset|strong|weak|s-var|shared) ",
+      "captures": {
+        "1": {  "name": "storage.modifier.lumi" }
+      }
+    },
+    "builtin-constant": {
+      "match": "\\b_|true|false\\b",
+      "name": "constant.language.lumi"
+    },
+    "builtin-variable": {
+      "match": "\\b(self|base|sys)([ .,()?!\\n])",
+      "captures": {
+        "1": { "name": "variable.language.lumi" },
+        "2": { "name": "keyword.operator.lumi" }
+      }
+    },
+    "function-name": {
+      "match": "\\b([a-z][a-z0-9-]*)(!?\\()",
+      "captures": {
+        "1": { "name": "entity.name.function.lumi" },
+        "2": { "name": "keyword.operator.lumi" }
+      }
+    },
+    "type-name": {
+      "match": "\\b([A-Z][a-z][a-zA-Z0-9]*)\\b",
+      "name": "entity.name.type.lumi"
+    },
+    "constant-name": {
+      "match": "\\b([A-Z][A-Z0-9\\-]*)\\b",
+      "name": "constant.other.lumi"
+    },
+    "variable-name": {
+      "match": "\\b([a-z][a-z0-9-]*)\\b",
+      "name": "variable.parameter.lumi"
+    }
+  }
+}
